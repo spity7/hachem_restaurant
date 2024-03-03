@@ -13,7 +13,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = Employee::all();
+
+        return view('employees.index', compact('employees'));
     }
 
     /**
@@ -21,7 +23,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('employees.create');
     }
 
     /**
@@ -29,7 +31,9 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-        //
+        Employee::create($request->validated());
+
+        return redirect()->route('employees.index')->with('success', 'تمت اضافة موظف جديد');
     }
 
     /**
@@ -45,7 +49,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('employees.edit', compact('employee'));
     }
 
     /**
@@ -53,7 +57,9 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        //
+        $employee->update($request->validated());
+
+        return  redirect()->route('employees.index')->with('success', 'تم تعديل الموظف');
     }
 
     /**
@@ -61,6 +67,9 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->withdrawals()->delete();
+        $employee->delete();
+
+        return redirect()->route('employees.index')->with('success', 'تم حذف  الموظف');
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'name',
@@ -29,6 +29,11 @@ class Employee extends Model
     {
         $withdrawalsTotal = $this->withdrawals()->sum('withdrawal');
         return $this->initial_salary - $withdrawalsTotal;
+    }
+
+    public function getWithdrawalsTotalAttribute()
+    {
+        return $this->withdrawals()->sum('withdrawal');
     }
 
     public function scopeSearch($query, $value)

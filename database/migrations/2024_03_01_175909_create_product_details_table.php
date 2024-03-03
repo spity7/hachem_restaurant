@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('decrease')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('withdrawal');
             $table->string('notes')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

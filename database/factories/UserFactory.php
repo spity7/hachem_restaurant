@@ -1,44 +1,45 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Seeders;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
-class UserFactory extends Factory
+class UserSeeder extends Seeder
 {
     /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
-
-    /**
-     * Define the model's default state.
+     * Run the database seeds.
      *
-     * @return array<string, mixed>
+     * @return void
      */
-    public function definition(): array
+    public function run()
     {
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+        $admin = User::create([
+            'first_name' => 'admin',
+            'last_name' => 'i am',
+            'email' => 'admin@admin.com',
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-        ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+            'terms_accepted' => true,
         ]);
+
+        $admin->assignRole('admin');
+
+        $user = User::create([
+            'first_name' => 'user',
+            'last_name' => 'will be',
+            'email' => 'user@user.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+            'terms_accepted' => true,
+        ]);
+
+        $user->assignRole('user');
+
+        User::factory()->count(50)->create();
+        User::factory()->count(20)->deleted()->create();
     }
 }

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('notes')->nullable();
             $table->integer('initial_salary');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

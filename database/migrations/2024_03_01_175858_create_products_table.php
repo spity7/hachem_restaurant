@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('total_decrease')->default(0);
             $table->integer('quantity_alert')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -13,7 +13,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -21,7 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -29,7 +31,18 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $product = Product::create([
+            'name' => $request->name,
+            'total_increase' => $request->increase,
+            'quantity_alert' => $request->quantity_alert,
+        ]);
+
+        $product->details()->create([
+            'increase' => $request->increase,
+            'price' => $request->price,
+        ]);
+
+        return redirect()->route('products.index')->with('success', 'تم اضافة بضاعة جديدة');
     }
 
     /**
@@ -45,7 +58,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -53,7 +66,9 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product->update($request->validated());
+
+        return redirect()->route('products.index')->with('success', 'تم تعديل البضاعة');
     }
 
     /**
@@ -61,6 +76,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->details()->delete();
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'تم ازالة البضاعة');
     }
 }
