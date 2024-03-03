@@ -22,7 +22,7 @@
     <li class="c-sidebar-nav-item">
         <a class="c-sidebar-nav-link {{ request()->is('suppliers/*') ? 'c-active' : '' }}"
             href="{{ route('suppliers.index') }}">
-            <i class="c-sidebar-nav-icon fas fa-fw fa-suppliers"></i>
+            <i class="c-sidebar-nav-icon fas fa-fw fa-phone"></i>
             Suppliers
         </a>
     </li>

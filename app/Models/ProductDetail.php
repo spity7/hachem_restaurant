@@ -20,9 +20,4 @@ class ProductDetail extends Model
     {
         return $this->belongsTo(Product::class);
     }
-
-    public function scopeSearch($query, $value)
-    {
-        return $query->where('notes', 'like', "%{$value}%");
-    }
 }

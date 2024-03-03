@@ -19,13 +19,18 @@ class Product extends Model
         return $this->hasMany(ProductDetail::class);
     }
 
-    public function scopeSearch($query, $value)
-    {
-        return $query->where('name', 'like', "%{$value}%");
-    }
-
     public function getCurrentQuantityAttribute()
     {
         return $this->total_increase - $this->total_decrease;
+    }
+
+    public function getTotalIncreaseAttribute()
+    {
+        return $this->details->sum('increase');
+    }
+
+    public function getTotalDecreaseAttribute()
+    {
+        return $this->details->sum('decrease');
     }
 }

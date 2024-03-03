@@ -66,16 +66,6 @@ class ProductDetailController extends Controller
     {
         $detail->delete();
 
-        if ($detail['increase']) {
-            $detail->product()->update([
-                'total_increase' => $detail->product->total_increase - $detail->increase,
-            ]);
-        } elseif ($detail['decrease']) {
-            $detail->product()->update([
-                'total_decrease' => $detail->product->total_decrease - $detail->decrease,
-            ]);
-        }
-
         return redirect()->route('products.index')->with('success', 'تم إلغاء المعاملة');
     }
 
@@ -83,20 +73,12 @@ class ProductDetailController extends Controller
     {
         $product->details()->create($request->validated());
 
-        $product->update([
-            'total_increase' => $product->total_increase + $request->increase,
-        ]);
-
         return redirect()->route('products.index')->with('success', 'تم إضافة الكمية');
     }
 
     public function addDecrease(AddDecreaseRequest $request, Product $product)
     {
         $product->details()->create($request->validated());
-
-        $product->update([
-            'total_decrease' => $product->total_decrease + $request->decrease,
-        ]);
 
         return redirect()->route('products.index')->with('success', 'تم سحب الكمية');
     }

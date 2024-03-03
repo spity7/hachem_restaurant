@@ -27,17 +27,11 @@ class Employee extends Model
 
     public function getCurrentSalaryAttribute()
     {
-        $withdrawalsTotal = $this->withdrawals()->sum('withdrawal');
-        return $this->initial_salary - $withdrawalsTotal;
+        return $this->initial_salary - $this->withdrawals_total;
     }
 
     public function getWithdrawalsTotalAttribute()
     {
         return $this->withdrawals()->sum('withdrawal');
-    }
-
-    public function scopeSearch($query, $value)
-    {
-        return $query->where('name', 'like', "%{$value}%")->orWhere('phone', 'like', "%{$value}%")->orWhere('address', 'like', "%{$value}%")->orWhere('notes', 'like', "%{$value}%");
     }
 }

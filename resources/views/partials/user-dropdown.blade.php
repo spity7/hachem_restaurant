@@ -3,6 +3,7 @@
         <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
             aria-expanded="false">
             <div class="c-avatar">
+                Profile
                 <i class="far fa-user"></i>
             </div>
         </a>

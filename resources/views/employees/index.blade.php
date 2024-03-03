@@ -52,7 +52,7 @@
                             </td>
                             <td>{{ $employee->name }}</td>
                             <td>{{ $employee->initial_salary }}</td>
-                            <td>{{ $employee->withdrawalsTotal }}</td>
+                            <td>{{ $employee->withdrawals_total }}</td>
                             <td>{{ $employee->current_salary }}</td>
                             <td>
                                 <a class="btn btn-sm btn-info" href="{{ route('employees.edit', $employee) }}">

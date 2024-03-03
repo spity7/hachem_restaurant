@@ -33,7 +33,6 @@ class ProductController extends Controller
     {
         $product = Product::create([
             'name' => $request->name,
-            'total_increase' => $request->increase,
             'quantity_alert' => $request->quantity_alert,
         ]);
 

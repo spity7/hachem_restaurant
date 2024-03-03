@@ -19,7 +19,7 @@
 <body class="c-app">
     <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
         <div class="c-sidebar-brand d-lg-down-none">
-            CRM
+            HACHEM
         </div>
         @include('partials.menu')
         <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
@@ -55,8 +55,8 @@
                 </form>
             </main>
             <footer class="c-footer">
-                <div><a href="https://coreui.io">CoreUI</a> © 2020 creativeLabs.</div>
-                <div class="ml-auto">Powered by&nbsp;<a href="https://coreui.io/">CoreUI</a></div>
+                <div>Business <span class="text-danger"> HACHEM Restaurant</span></div>
+                <div class="ml-auto">&nbsp;LEBANON</div>
             </footer>
         </div>
     </div>
