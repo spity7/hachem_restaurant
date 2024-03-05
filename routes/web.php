@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductDetailController;
@@ -20,11 +22,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Auth::routes();
+Route::permanentRedirect('/', 'login');
+
+route::get('rrr', [RegisterController::class, 'showRegistrationForm'])->name('register');
+route::post('rrr', [RegisterController::class, 'register']);
+route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+route::post('login', [LoginController::class, 'login']);
+route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

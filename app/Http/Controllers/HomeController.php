@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Product;
 use App\Models\Supplier;
+use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,6 +27,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $employees = Employee::all();
+        $employees_count = Employee::count();
+        $employees_total_salaries = Employee::sum('initial_salary');
+        $withdrawals_total = Withdrawal::sum('withdrawal');
+        $salaries_rest = $employees_total_salaries - $withdrawals_total;
+
+        $products = Product::all();
+        $suppliers = Supplier::all();
+
+        return view('home', compact(
+            'employees',
+            'employees_count',
+            'employees_total_salaries',
+            'withdrawals_total',
+            'salaries_rest',
+            'products',
+            'suppliers'
+        ));
     }
 }

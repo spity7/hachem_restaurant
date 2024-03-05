@@ -1,4 +1,4 @@
-<ul class="c-sidebar-nav">
+<ul class="c-sidebar-nav" style="font-weight: bold;">
     <li class="c-sidebar-nav-item">
         <a class="c-sidebar-nav-link" href="{{ route('home') }}">
             <i class="c-sidebar-nav-icon fas fa-fw fa-tachometer-alt"></i>

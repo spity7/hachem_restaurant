@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::latest()->get();
 
         return view('products.index', compact('products'));
     }
@@ -39,6 +39,7 @@ class ProductController extends Controller
         $product->details()->create([
             'increase' => $request->increase,
             'price' => $request->price,
+            'notes' => $request->notes,
         ]);
 
         return redirect()->route('products.index')->with('success', 'تم اضافة بضاعة جديدة');
@@ -57,7 +58,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $details = $product->details()->latest()->get();
+
+        return view('products.edit', compact('product', 'details'));
     }
 
     /**

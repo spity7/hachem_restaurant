@@ -97,6 +97,8 @@
         </div>
     </div>
 
+    <hr>
+
     <div class="card">
         <div class="card-header text-danger">سحب كمية</div>
 
@@ -153,7 +155,8 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>الكمية</th>
+                        <th class="text-success">الكمية المضافة</th>
+                        <th class="text-danger">الكمية المسحوبة</th>
                         <th>السعر</th>
                         <th>Notes</th>
                         <th>التاريخ</th>
@@ -161,10 +164,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($product->details as $detail)
-                        @if ($detail->decrease)
+                    @foreach ($details as $detail)
+                        @if ($detail->decrease && !$detail->increase)
                             <tr class="table-danger">
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $detail->increase }}</td>
+                                <td>{{ $detail->decrease }}</td>
+                                <td>{{ $detail->price }}</td>
+                                <td>{{ $detail->notes }}</td>
+                                <td>{{ $detail->created_at->format('Y-m-d') }}</td>
+                                <td>
+                                    <form action="{{ route('productDetails.destroy', $detail) }}" method="POST"
+                                        onsubmit="return confirm('Are your sure?');" style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        @elseif($detail->increase && !$detail->decrease)
+                            <tr class="table-success">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $detail->increase }}</td>
                                 <td>{{ $detail->decrease }}</td>
                                 <td>{{ $detail->price }}</td>
                                 <td>{{ $detail->notes }}</td>
@@ -179,9 +200,10 @@
                                 </td>
                             </tr>
                         @else
-                            <tr class="table-success">
+                            <tr class="table-secondary">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $detail->increase }}</td>
+                                <td>{{ $detail->decrease }}</td>
                                 <td>{{ $detail->price }}</td>
                                 <td>{{ $detail->notes }}</td>
                                 <td>{{ $detail->created_at->format('Y-m-d') }}</td>

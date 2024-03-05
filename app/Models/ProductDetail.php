@@ -14,6 +14,7 @@ class ProductDetail extends Model
         'increase',
         'price',
         'decrease',
+        'notes'
     ];
 
     public function product()

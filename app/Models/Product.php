@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'name', 'total_increase', 'total_decrease', 'current_quantity', 'quantity_alert', 'notes'
+        'id', 'name', 'quantity_alert'
     ];
 
     public function details()

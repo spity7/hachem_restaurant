@@ -1,17 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card">
-        <div class="card-header">{{ __('Dashboard') }}</div>
+    @foreach ($products as $product)
+        @if ($product->current_quantity <= $product->quantity_alert)
+            <div class="card" style="width: 19rem; font-weight: bold;">
+                <div class="card-header text-danger">!!! تنبيه !!!</div>
+
+                <div class="card-body">
+                    إنتبه الى : {{ $product->name }}
+                </div>
+            </div>
+        @endif
+    @endforeach
+
+
+    <div class="card" style="width: 16rem; font-weight: bold;">
+        <div class="card-header">عدد الموظفين: {{ $employees_count }}</div>
 
         <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            {{ __('You are logged in!') }}
+            مجموع الرواتب: {{ $employees_total_salaries }}
+            <br><br>
+            <span class="text-danger">
+                مجموع السلف: {{ $withdrawals_total }}
+            </span>
+            <br><br>
+            <span class="text-success">
+                باقي الرواتب: {{ $salaries_rest }}
+            </span>
         </div>
     </div>
 @endsection

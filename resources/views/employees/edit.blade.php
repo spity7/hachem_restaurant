@@ -170,7 +170,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-secondary">
-                    @foreach ($employee->withdrawals as $withdrawal)
+                    @foreach ($withdrawals as $withdrawal)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $withdrawal->withdrawal }}</td>
